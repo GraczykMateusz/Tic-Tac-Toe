@@ -1,9 +1,8 @@
 #include <iostream>
-
-using std::cout;
+#include "start.cpp"
 
 int main()
 {
-	cout<<"Linux test";
+	showStartMenu();
 	return 0;
 }
