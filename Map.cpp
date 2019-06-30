@@ -1,4 +1,5 @@
 #include <iostream>
+#include "systemClear.cpp"
 
 using std::cout;
 using std::endl;
@@ -14,7 +15,7 @@ void Map::setMapNumbers() {
 	}
 }
 
-void Map::showMap() {
+void Map::drawMap() {
 	systemClear();
         cout << "Tic-Tac-Toe" << endl << endl;
 	//Horizontal lines
@@ -35,7 +36,7 @@ void Map::showMap() {
 				}
 				if(i == 1) {
                         	        for(int k = 3; k < 6; k++) {
-                                        cout << array[a][k];
+                        	                cout << array[a][k];
                         	        }
 				}
 				if(i == 2) {
@@ -58,7 +59,7 @@ void Map::showMap() {
                                 }
                                 if(i == 4) {
                                         for(int k = 3; k < 6; k++) {
-                                        cout << array[a][k];
+                                	        cout << array[a][k];
                                         }
                                 }                           
                                 if(i == 5) {
@@ -81,7 +82,7 @@ void Map::showMap() {
                                 }
                                 if(i == 7) {
                                         for(int k = 3; k < 6; k++) {
-                                        cout << array[a][k];
+                                        	cout << array[a][k];
                                         }
                                 }
                                 if(i == 8) {
