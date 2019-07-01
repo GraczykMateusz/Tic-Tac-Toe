@@ -2,9 +2,11 @@
 
 class Map {
 	public:
-	void setMapNumbers(); 
+	Map() = default;
+  	~Map() = default;	
+ 	void setMapNumbers(); 
 	void drawMap();
-	std::string getArray() { return array[9][9]; }
+	std::string getArray(); 
 	private:
 	std::string array[9][9]; //[area][position] 
 };

@@ -1,15 +1,17 @@
 #include <iostream>
 #include <memory>
-#include "GameManager.h"
 #include "Map.h"
+#include "GameManager.h"
 
 int main() {
 	std::unique_ptr<GameManager> gameManager(new GameManager());
-	std::unique_ptr<Map> map(new Map());
+	std::shared_ptr<Map> map(new Map());
 	map->setMapNumbers();
-
-	map->drawMap();
-	gameManager->inputControl();
 	
+	do {
+		map->drawMap();
+		gameManager->inputControl();
+		gameManager->setIntoMap(map);	
+	} while(gameManager->checkWin());
 	return 0;
 }

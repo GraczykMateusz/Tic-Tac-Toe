@@ -1,4 +1,6 @@
 #include <iostream>
+#include <memory>
+#include "Map.h"
 #include "systemClear.cpp"
 
 using std::cout;
@@ -15,6 +17,9 @@ void Map::setMapNumbers() {
 	}
 }
 
+std::string getArray() {
+	
+}
 void Map::drawMap() {
 	systemClear();
         cout << "Tic-Tac-Toe" << endl << endl;
