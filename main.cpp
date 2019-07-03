@@ -6,7 +6,6 @@
 int main() {
 	std::unique_ptr<GameManager> gameManager(new GameManager());
 	std::shared_ptr<Map> map(new Map());
-	map->setMapNumbers();
 	
 	do {
 		map->drawMap();
