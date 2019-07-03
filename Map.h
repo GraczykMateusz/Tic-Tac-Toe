@@ -1,12 +1,12 @@
 #include <string>
+#include <vector>
 
 class Map {
 	public:
-	Map() = default;
-  	~Map() = default;	
- 	void setMapNumbers(); 
+	Map();
+  	~Map() = default;	 
 	void drawMap();
-	std::string getArray(); 
 	private:
-	std::string array[9][9]; //[area][position] 
+	void setMapNumbers();
+	std::vector <std::vector<std::string>> vecMap2D {9, std::vector<std::string>(9, " ")}; //[area][position] 
 };
