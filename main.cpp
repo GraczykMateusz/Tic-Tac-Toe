@@ -9,7 +9,7 @@ int main() {
 	
 	do {
 		map->drawMap();
-		gameManager->inputControl();
+		gameManager->inputControl(map);
 		gameManager->setIntoMap(map);	
 	} while(gameManager->checkWin());
 	return 0;

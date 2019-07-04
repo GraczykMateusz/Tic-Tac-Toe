@@ -10,6 +10,7 @@ using std::endl;
 Map::Map() {
 	setMapNumbers();
 }
+
 void Map::setMapNumbers() {
 	int value;
 	for(int i = 0; i < 9; i++) {
