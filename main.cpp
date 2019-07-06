@@ -4,13 +4,16 @@
 #include "GameManager.h"
 
 int main() {
-	std::unique_ptr<GameManager> gameManager(new GameManager());
-	std::shared_ptr<Map> map(new Map());
-	
 	do {
+		std::unique_ptr<GameManager> gameManager(new GameManager());
+		std::shared_ptr<Map> map(new Map());	
+		do {
+			map->drawMap();
+			gameManager->inputControl(map);
+			gameManager->setIntoMap(map);	
+		} while(gameManager->checkWin(map));
 		map->drawMap();
-		gameManager->inputControl(map);
-		gameManager->setIntoMap(map);	
-	} while(gameManager->checkWin());
+		gameManager->showWinner();
+	} while(gameManager->playAgain());
 	return 0;
 }

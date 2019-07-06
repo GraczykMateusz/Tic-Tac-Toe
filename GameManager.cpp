@@ -85,6 +85,71 @@ void GameManager::setIntoMap(std::shared_ptr<Map> map) {
 	round++;
 }
 
-bool GameManager::checkWin() {
+bool GameManager::checkWin(std::shared_ptr<Map> map) {
+	auto* ptrToMap = map->getMap();
+	//Check horizontal lines
+	for(int i = 0; i < 9; i += 3) {
+		//For X
+		if((*ptrToMap)[i][4] == "#" && (*ptrToMap)[i + 1][4] == "#" && (*ptrToMap)[i + 2][4] == "#") {
+			winner = 'X';
+			return false;
+		}
+		//For O
+		if((*ptrToMap)[i][4] == " " && (*ptrToMap)[i + 1][4] == " " && (*ptrToMap)[i + 2][4] == " ") {
+			winner = 'O';
+			return false;
+		}
+	}
+	//Check vertical lines
+	for(int i = 0; i < 3; i++) {
+		//For X
+		if((*ptrToMap)[i][4] == "#" && (*ptrToMap)[i + 3][4] == "#" && (*ptrToMap)[i + 6][4] == "#") {
+	        	winner = 'X';
+                        return false;
+                }
+                //For O
+                if((*ptrToMap)[i][4] == " " && (*ptrToMap)[i + 3][4] == " " && (*ptrToMap)[i + 6][4] == " ") {
+                        winner = 'O';
+                        return false;
+                }
+	}
+	//Check diagonal lines
+	//For X
+        if((*ptrToMap)[0][4] == "#" && (*ptrToMap)[4][4] == "#" && (*ptrToMap)[8][4] == "#") {
+        	winner = 'X';
+                return false;
+        }
+        if((*ptrToMap)[2][4] == "#" && (*ptrToMap)[4][4] == "#" && (*ptrToMap)[6][4] == "#") {
+                winner = 'X';
+                return false;	
+	}
+	//For O
+	if((*ptrToMap)[0][4] == " " && (*ptrToMap)[4][4] == " " && (*ptrToMap)[8][4] == " ") {
+                winner = 'O';
+                return false;
+        }
+        if((*ptrToMap)[2][4] == " " && (*ptrToMap)[4][4] == " " && (*ptrToMap)[6][4] == " ") {
+                winner = 'O';
+                return false;
+        }
+	//No winner
 	return true;
+}
+
+void GameManager::showWinner() {
+	cout << "Congratulations! " <<  winner << " is the winner" << std::endl;
+}
+
+bool GameManager::playAgain() {
+	do {
+		cout << "Do you want play again? (y/n):";
+		cin >> playAgain;
+		cout << std::endl;
+	} while(playAgain != 'y' || playAgain != 'Y' || playAgain != 'n' || playAgain != 'N');
+	if(playAgain == 'y' || playAgain == 'Y') {
+		return true;
+	}
+	else {
+		return false;
+	}
 }
