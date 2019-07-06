@@ -13,7 +13,7 @@ void GameManager::inputControl(std::shared_ptr<Map> map) {
 	int selectedField;
 
 	//Sets whose round it is 
-	if(round == 0) {
+	if(round == 0) { //First round is always 0
 		srand(time(NULL));
 		round = rand() % 2;
 	} 
@@ -35,8 +35,6 @@ void GameManager::inputControl(std::shared_ptr<Map> map) {
 			cout << "Wrong field, select again: ";
 		}
 	}while((selectedField < 0 && selectedField > 8) || field == -1);
-	
-	round++;
 }
 
 void GameManager::setX(std::shared_ptr<Map> map) {
@@ -84,6 +82,7 @@ void GameManager::setIntoMap(std::shared_ptr<Map> map) {
 	else {
 		setO(map);
 	}
+	round++;
 }
 
 bool GameManager::checkWin() {
