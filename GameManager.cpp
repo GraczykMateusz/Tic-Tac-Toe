@@ -12,12 +12,12 @@ using std::cin;
 void GameManager::inputControl(std::shared_ptr<Map> map) {
 	int selectedField;
 
-	//Sets whose round it is 
+	//Sets whose player turn it is 
 	if(round == 0) { //First round is always 0
 		srand(time(NULL));
-		round = rand() % 2;
+		playerTurn = rand() % 2;
 	} 
-	if(round % 2 != 0) {
+	if(playerTurn % 2 != 0) {
 		cout << "Player X: ";
 	}
 	else {
@@ -60,8 +60,8 @@ void GameManager::setO(std::shared_ptr<Map> map) {
         delete ptrToMap;
 }
 
-std::string GameManager::checkRound() {
-	if(round % 2 != 0) {
+std::string GameManager::checkPlayerTurn() {
+	if(playerTurn % 2 != 0) {
 		return "X";
 	}
 	else {
@@ -82,12 +82,13 @@ bool GameManager::checkFieldAvailability(int selectedField, std::shared_ptr<Map>
 }
 
 void GameManager::setIntoMap(std::shared_ptr<Map> map) {
-	if(checkRound() == "X") {
+	if(checkPlayerTurn() == "X") {
 		setX(map);
 	}
 	else {
 		setO(map);
 	}
+	playerTurn++;
 	round++;
 }
 
@@ -97,53 +98,65 @@ bool GameManager::checkWin(std::shared_ptr<Map> map) {
 	for(int i = 0; i < 9; i += 3) {
 		//For X
 		if((*ptrToMap)[i][4] == "#" && (*ptrToMap)[i + 1][4] == "#" && (*ptrToMap)[i + 2][4] == "#") {
-			this->winner = 'X';
-			return false;
+			return this->winX();
 		}
 		//For O
 		if((*ptrToMap)[i][4] == " " && (*ptrToMap)[i + 1][4] == " " && (*ptrToMap)[i + 2][4] == " ") {
-			this->winner = 'O';
-			return false;
+			return this->winO();
 		}
 	}
 	//Check vertical lines
 	for(int i = 0; i < 3; i++) {
 		//For X
 		if((*ptrToMap)[i][4] == "#" && (*ptrToMap)[i + 3][4] == "#" && (*ptrToMap)[i + 6][4] == "#") {
-	        	this->winner = 'X';
-                        return false;
+	        	return this->winX();
                 }
                 //For O
                 if((*ptrToMap)[i][4] == " " && (*ptrToMap)[i + 3][4] == " " && (*ptrToMap)[i + 6][4] == " ") {
-                        this->winner = 'O';
-                        return false;
+                        return this->winO();
                 }
 	}
 	//Check diagonal lines
 	//For X
         if((*ptrToMap)[0][4] == "#" && (*ptrToMap)[4][4] == "#" && (*ptrToMap)[8][4] == "#") {
-        	this->winner = 'X';
-                return false;
+        	return this->winX();
         }
         if((*ptrToMap)[2][4] == "#" && (*ptrToMap)[4][4] == "#" && (*ptrToMap)[6][4] == "#") {
-                this->winner = 'X';
-                return false;	
+                return this->winX();	
 	}
 	//For O
 	if((*ptrToMap)[0][4] == " " && (*ptrToMap)[4][4] == " " && (*ptrToMap)[8][4] == " ") {
-                this->winner = 'O';
-                return false;
+                return this->winO();
         }
         if((*ptrToMap)[2][4] == " " && (*ptrToMap)[4][4] == " " && (*ptrToMap)[6][4] == " ") {
-                this->winner = 'O';
-                return false;
+                return this->winO();
         }
+	//Check if all fields are occupied
+	if(round == 9) {
+		this->winner = "Draw";
+		return false;	
+	}
 	//No winner
 	return true;
 }
 
+bool GameManager::winX() {
+	this->winner = "X";
+        return false;
+}
+
+bool GameManager::winO() {
+	this->winner = "O";
+        return false;
+}
+
 void GameManager::showWinner() {
-	cout << "Congratulations! " <<  this->winner << " is the winner" << std::endl;
+	if(this->winner != "Draw") {
+		cout << "Congratulations! " <<  this->winner << " is the winner" << std::endl;
+	}
+	else {
+		cout << this->winner << std::endl;
+	}
 }
 
 bool GameManager::playAgain() {
