@@ -41,7 +41,9 @@ void GameManager::setX(std::shared_ptr<Map> map) {
 	auto* ptrToMap = map->getMap();
 	for(int i = 0; i < 9; i += 2) {
 		(*ptrToMap)[field][i] = "#";
-	}		
+	}
+	ptrToMap = NULL;
+	delete ptrToMap;		
 }
 
 void GameManager::setO(std::shared_ptr<Map> map) {
@@ -54,6 +56,8 @@ void GameManager::setO(std::shared_ptr<Map> map) {
 			(*ptrToMap)[field][i] = " ";
 		}	
 	}
+	ptrToMap = NULL;
+        delete ptrToMap;
 }
 
 std::string GameManager::checkRound() {
@@ -73,6 +77,8 @@ bool GameManager::checkFieldAvailability(int selectedField, std::shared_ptr<Map>
 	else {
 		return true;
 	}
+	ptrToMap = NULL;
+        delete ptrToMap;
 }
 
 void GameManager::setIntoMap(std::shared_ptr<Map> map) {
@@ -91,12 +97,12 @@ bool GameManager::checkWin(std::shared_ptr<Map> map) {
 	for(int i = 0; i < 9; i += 3) {
 		//For X
 		if((*ptrToMap)[i][4] == "#" && (*ptrToMap)[i + 1][4] == "#" && (*ptrToMap)[i + 2][4] == "#") {
-			winner = 'X';
+			this->winner = 'X';
 			return false;
 		}
 		//For O
 		if((*ptrToMap)[i][4] == " " && (*ptrToMap)[i + 1][4] == " " && (*ptrToMap)[i + 2][4] == " ") {
-			winner = 'O';
+			this->winner = 'O';
 			return false;
 		}
 	}
@@ -104,32 +110,32 @@ bool GameManager::checkWin(std::shared_ptr<Map> map) {
 	for(int i = 0; i < 3; i++) {
 		//For X
 		if((*ptrToMap)[i][4] == "#" && (*ptrToMap)[i + 3][4] == "#" && (*ptrToMap)[i + 6][4] == "#") {
-	        	winner = 'X';
+	        	this->winner = 'X';
                         return false;
                 }
                 //For O
                 if((*ptrToMap)[i][4] == " " && (*ptrToMap)[i + 3][4] == " " && (*ptrToMap)[i + 6][4] == " ") {
-                        winner = 'O';
+                        this->winner = 'O';
                         return false;
                 }
 	}
 	//Check diagonal lines
 	//For X
         if((*ptrToMap)[0][4] == "#" && (*ptrToMap)[4][4] == "#" && (*ptrToMap)[8][4] == "#") {
-        	winner = 'X';
+        	this->winner = 'X';
                 return false;
         }
         if((*ptrToMap)[2][4] == "#" && (*ptrToMap)[4][4] == "#" && (*ptrToMap)[6][4] == "#") {
-                winner = 'X';
+                this->winner = 'X';
                 return false;	
 	}
 	//For O
 	if((*ptrToMap)[0][4] == " " && (*ptrToMap)[4][4] == " " && (*ptrToMap)[8][4] == " ") {
-                winner = 'O';
+                this->winner = 'O';
                 return false;
         }
         if((*ptrToMap)[2][4] == " " && (*ptrToMap)[4][4] == " " && (*ptrToMap)[6][4] == " ") {
-                winner = 'O';
+                this->winner = 'O';
                 return false;
         }
 	//No winner
@@ -137,16 +143,15 @@ bool GameManager::checkWin(std::shared_ptr<Map> map) {
 }
 
 void GameManager::showWinner() {
-	cout << "Congratulations! " <<  winner << " is the winner" << std::endl;
+	cout << "Congratulations! " <<  this->winner << " is the winner" << std::endl;
 }
 
 bool GameManager::playAgain() {
 	do {
 		cout << "Do you want play again? (y/n):";
-		cin >> playAgain;
-		cout << std::endl;
-	} while(playAgain != 'y' || playAgain != 'Y' || playAgain != 'n' || playAgain != 'N');
-	if(playAgain == 'y' || playAgain == 'Y') {
+		cin >> this->varPlayAgain;
+	} while(varPlayAgain != 'y' && varPlayAgain != 'Y' && varPlayAgain != 'n' && varPlayAgain != 'N');
+	if(varPlayAgain == 'y' || varPlayAgain == 'Y') {
 		return true;
 	}
 	else {

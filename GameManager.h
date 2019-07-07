@@ -19,7 +19,7 @@ class GameManager {
 	std::string checkRound();
 	bool checkFieldAvailability(int selectedField, std::shared_ptr<Map> map);
 	/*Variables*/
-	char playAgain;
+	char varPlayAgain;
 	char winner;
 	short field;
 	unsigned short round = 0;

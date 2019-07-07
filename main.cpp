@@ -4,6 +4,7 @@
 #include "GameManager.h"
 
 int main() {
+	bool x;
 	do {
 		std::unique_ptr<GameManager> gameManager(new GameManager());
 		std::shared_ptr<Map> map(new Map());	
@@ -14,6 +15,7 @@ int main() {
 		} while(gameManager->checkWin(map));
 		map->drawMap();
 		gameManager->showWinner();
-	} while(gameManager->playAgain());
+		x = gameManager->playAgain();
+	} while(x);
 	return 0;
 }
