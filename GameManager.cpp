@@ -38,7 +38,7 @@ void GameManager::inputControl(std::shared_ptr<Map> map) {
 }
 
 void GameManager::setX(std::shared_ptr<Map> map) {
-	auto ptrToMap = std::make_unique<std::vector <std::vector<std::string>>*>(map->getMap());
+	auto ptrToMap = new auto(map->getMap());
 	
 	for(int i = 0; i < 9; i += 2) {
 		(*(*ptrToMap))[field][i] = "#";
@@ -46,7 +46,7 @@ void GameManager::setX(std::shared_ptr<Map> map) {
 }
 
 void GameManager::setO(std::shared_ptr<Map> map) {
-	auto ptrToMap = std::make_unique<std::vector <std::vector<std::string>>*>(map->getMap());
+	auto ptrToMap = new auto(map->getMap());
 
 	for(int i = 0; i < 9; i++) {
 		if(i != 4) {
@@ -68,7 +68,7 @@ std::string GameManager::checkPlayerTurn() {
 }
 
 bool GameManager::checkFieldAvailability(int selectedField, std::shared_ptr<Map> map) {	
-	auto ptrToMap = std::make_unique<std::vector <std::vector<std::string>>*>(map->getMap());
+	auto ptrToMap = new auto(map->getMap());
 	
 	if(selectedField >= 0 && selectedField <= 8) {
 		if((*(*ptrToMap))[selectedField][0] == "#") { //Position '0' is common for X and O
@@ -90,7 +90,7 @@ void GameManager::setIntoMap(std::shared_ptr<Map> map) {
 }
 
 bool GameManager::checkWin(std::shared_ptr<Map> map) {
-	auto ptrToMap = std::make_unique<std::vector <std::vector<std::string>>*>(map->getMap());
+	auto ptrToMap = new auto(map->getMap());
 
 	//Check horizontal lines
 	for(int i = 0; i < 9; i += 3) {
