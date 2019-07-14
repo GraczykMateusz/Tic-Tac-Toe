@@ -27,7 +27,7 @@ void GameManager::inputControl(std::shared_ptr<Map> map) {
 	//Protection against wrong input
 	do {
 		cin >> selectedField;
-		if(checkFieldAvailability(selectedField, map)) {
+		if(checkFieldAvailability(selectedField, map) && selectedField >= 0 && selectedField <= 8) {
 			field = selectedField;
 		}
 		else {
@@ -69,13 +69,13 @@ std::string GameManager::checkPlayerTurn() {
 
 bool GameManager::checkFieldAvailability(int selectedField, std::shared_ptr<Map> map) {	
 	auto ptrToMap = std::make_unique<std::vector <std::vector<std::string>>*>(map->getMap());
-
-	if((*(*ptrToMap))[selectedField][0] == "#") { //Position '0' is common for X and O
-		return false;
+	
+	if(selectedField >= 0 && selectedField <= 8) {
+		if((*(*ptrToMap))[selectedField][0] == "#") { //Position '0' is common for X and O
+			return false;
+		}
 	}
-	else {
-		return true;
-	}
+	return true;
 }
 
 void GameManager::setIntoMap(std::shared_ptr<Map> map) {
