@@ -27,6 +27,7 @@ void GameManager::inputControl(std::shared_ptr<Map> map) {
 	//Protection against wrong input
 	do {
 		cin >> selectedField;
+	
 		if(checkFieldAvailability(selectedField, map) && selectedField >= 0 && selectedField <= 8) {
 			field = selectedField;
 		}
@@ -38,22 +39,22 @@ void GameManager::inputControl(std::shared_ptr<Map> map) {
 }
 
 void GameManager::setX(std::shared_ptr<Map> map) {
-	auto ptrToMap = new auto(map->getMap());
+	auto ptrToMap = map->getMap();
 	
 	for(int i = 0; i < 9; i += 2) {
-		(*(*ptrToMap))[field][i] = "#";
+		(*ptrToMap)[field][i] = "#";
 	}		
 }
 
 void GameManager::setO(std::shared_ptr<Map> map) {
-	auto ptrToMap = new auto(map->getMap());
+	auto ptrToMap = map->getMap();
 
-	for(int i = 0; i < 9; i++) {
+	for(int i = 0; i < 9; ++i) {
 		if(i != 4) {
-			(*(*ptrToMap))[field][i] = "#";
+			(*ptrToMap)[field][i] = "#";
 		}
 		else {
-			(*(*ptrToMap))[field][i] = " ";
+			(*ptrToMap)[field][i] = " ";
 		}	
 	}
 }
@@ -68,10 +69,10 @@ std::string GameManager::checkPlayerTurn() {
 }
 
 bool GameManager::checkFieldAvailability(int selectedField, std::shared_ptr<Map> map) {	
-	auto ptrToMap = new auto(map->getMap());
+	auto ptrToMap =map->getMap();
 	
 	if(selectedField >= 0 && selectedField <= 8) {
-		if((*(*ptrToMap))[selectedField][0] == "#") { //Position '0' is common for X and O
+		if((*ptrToMap)[selectedField][0] == "#") { //Position '0' is common for X and O
 			return false;
 		}
 	}
@@ -85,53 +86,53 @@ void GameManager::setIntoMap(std::shared_ptr<Map> map) {
 	else {
 		setO(map);
 	}
-	playerTurn++;
-	round++;
+	++playerTurn;
+	++round;
 }
 
 bool GameManager::checkWin(std::shared_ptr<Map> map) {
-	auto ptrToMap = new auto(map->getMap());
+	auto ptrToMap = map->getMap();
 
 	//Check horizontal lines
 	for(int i = 0; i < 9; i += 3) {
 		//For X
-		if((*(*ptrToMap))[i][4] == "#" && (*(*ptrToMap))[i + 1][4] == "#" && (*(*ptrToMap))[i + 2][4] == "#") {
-			return this->winX();
+		if((*ptrToMap)[i][4] == "#" && (*ptrToMap)[i + 1][4] == "#" && (*ptrToMap)[i + 2][4] == "#") {
+			return winX();
 		}
 		//For O
-		if((*(*ptrToMap))[i][4] == " " && (*(*ptrToMap))[i + 1][4] == " " && (*(*ptrToMap))[i + 2][4] == " ") {
-			return this->winO();
+		if((*ptrToMap)[i][4] == " " && (*ptrToMap)[i + 1][4] == " " && (*ptrToMap)[i + 2][4] == " ") {
+			return winO();
 		}
 	}
 	//Check vertical lines
-	for(int i = 0; i < 3; i++) {
+	for(int i = 0; i < 3; ++i) {
 		//For X
-		if((*(*ptrToMap))[i][4] == "#" && (*(*ptrToMap))[i + 3][4] == "#" && (*(*ptrToMap))[i + 6][4] == "#") {
-	        	return this->winX();
+		if((*ptrToMap)[i][4] == "#" && (*ptrToMap)[i + 3][4] == "#" && (*ptrToMap)[i + 6][4] == "#") {
+	        	return winX();
                 }
                 //For O
-                if((*(*ptrToMap))[i][4] == " " && (*(*ptrToMap))[i + 3][4] == " " && (*(*ptrToMap))[i + 6][4] == " ") {
-                        return this->winO();
+                if((*ptrToMap)[i][4] == " " && (*ptrToMap)[i + 3][4] == " " && (*ptrToMap)[i + 6][4] == " ") {
+                        return winO();
                 }
 	}
 	//Check diagonal lines
 	//For X
-        if((*(*ptrToMap))[0][4] == "#" && (*(*ptrToMap))[4][4] == "#" && (*(*ptrToMap))[8][4] == "#") {
-        	return this->winX();
+        if((*ptrToMap)[0][4] == "#" && (*ptrToMap)[4][4] == "#" && (*ptrToMap)[8][4] == "#") {
+        	return winX();
         }
-        if((*(*ptrToMap))[2][4] == "#" && (*(*ptrToMap))[4][4] == "#" && (*(*ptrToMap))[6][4] == "#") {
-                return this->winX();	
+        if((*ptrToMap)[2][4] == "#" && (*ptrToMap)[4][4] == "#" && (*ptrToMap)[6][4] == "#") {
+                return winX();	
 	}
 	//For O
-	if((*(*ptrToMap))[0][4] == " " && (*(*ptrToMap))[4][4] == " " && (*(*ptrToMap))[8][4] == " ") {
-                return this->winO();
+	if((*ptrToMap)[0][4] == " " && (*ptrToMap)[4][4] == " " && (*ptrToMap)[8][4] == " ") {
+                return winO();
         }
-        if((*(*ptrToMap))[2][4] == " " && (*(*ptrToMap))[4][4] == " " && (*(*ptrToMap))[6][4] == " ") {
-                return this->winO();
+        if((*ptrToMap)[2][4] == " " && (*ptrToMap)[4][4] == " " && (*ptrToMap)[6][4] == " ") {
+                return winO();
         }
 	//Check if all fields are occupied
 	if(round == 9) {
-		this->winner = "Draw";
+		winner = "Draw";
 		return false;	
 	}
 	//No winner
@@ -139,17 +140,17 @@ bool GameManager::checkWin(std::shared_ptr<Map> map) {
 }
 
 bool GameManager::winX() {
-	this->winner = "X";
+	winner = "X";
         return false;
 }
 
 bool GameManager::winO() {
-	this->winner = "O";
+	winner = "O";
         return false;
 }
 
 void GameManager::showWinner() {
-	if(this->winner != "Draw") {
+	if(winner != "Draw") {
 		cout << "Congratulations! " <<  this->winner << " is the winner" << std::endl;
 	}
 	else {
@@ -160,8 +161,9 @@ void GameManager::showWinner() {
 bool GameManager::playAgain() {
 	do {
 		cout << "Do you want play again? (y/n):";
-		cin >> this->varPlayAgain;
+		cin >> varPlayAgain;
 	} while(varPlayAgain != 'y' && varPlayAgain != 'Y' && varPlayAgain != 'n' && varPlayAgain != 'N');
+
 	if(varPlayAgain == 'y' || varPlayAgain == 'Y') {
 		return true;
 	}

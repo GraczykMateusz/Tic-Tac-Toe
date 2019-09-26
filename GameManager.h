@@ -3,23 +3,29 @@
 class Map;
 
 class GameManager {
-	public:
+public:
 	GameManager() = default;
 	~GameManager() = default;
+
+	/*SETUP*/
 	void inputControl(std::shared_ptr<Map> map);
 	void setIntoMap(std::shared_ptr<Map> map);
-	void showWinner();	
-    	bool checkWin(std::shared_ptr<Map> map);
 	bool playAgain();
+
+	/*WIN*/
+	void showWinner();
+	bool checkWin(std::shared_ptr<Map> map);
 	bool winX();
 	bool winO();
 
-	private:
+private:
+
 	/*Methods*/
 	void setX(std::shared_ptr<Map> map);
 	void setO(std::shared_ptr<Map> map);
 	std::string checkPlayerTurn();
 	bool checkFieldAvailability(int selectedField, std::shared_ptr<Map> map);
+
 	/*Variables*/
 	char varPlayAgain;
 	std::string winner;
