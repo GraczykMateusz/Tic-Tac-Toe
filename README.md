@@ -6,8 +6,8 @@ This is my first project that I try to learn c++11 standard and STL library:
 * unique_ptr / shared_ptr
 * vector2D
 
-*START GAME <br/>
+*START GAME* <br/>
 ![](Pictures/start_game.png)
 
-*FINISH GAME <br/>
+*FINISH GAME* <br/>
 ![](Pictures/finish_game.png)
