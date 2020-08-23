@@ -160,7 +160,7 @@ void GameManager::showWinner() {
 
 bool GameManager::playAgain() {
 	do {
-		cout << "Do you want play again? (y/n):";
+		cout << "Do you want to play again? (y/n):";
 		cin >> varPlayAgain;
 	} while(varPlayAgain != 'y' && varPlayAgain != 'Y' && varPlayAgain != 'n' && varPlayAgain != 'N');
 
