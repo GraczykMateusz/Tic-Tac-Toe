@@ -9,5 +9,5 @@ This is my first project that I try to learn c++11 standard and STL library:
 *START GAME <br/>
 ![](Pictures/start_game.png)
 
-*FININSH GAME <br/>
+*FINISH GAME <br/>
 ![](Pictures/finish_game.png)
