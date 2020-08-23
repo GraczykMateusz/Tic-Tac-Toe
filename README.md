@@ -5,3 +5,9 @@ This is my first project that I try to learn c++11 standard and STL library:
 * auto type
 * unique_ptr / shared_ptr
 * vector2D
+
+*START GAME
+![](Pictures/start_game.png)
+
+*FININSH GAME
+![](Pictures/finish_game.png)
