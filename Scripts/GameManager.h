@@ -1,3 +1,6 @@
+#ifndef GAME_MANAGER_H
+#define GAME_MANAGER_H
+
 #include <string>
 
 class Map;
@@ -33,3 +36,5 @@ private:
 	unsigned short playerTurn = 0;
 	unsigned short round = 0;
 };
+
+#endif
