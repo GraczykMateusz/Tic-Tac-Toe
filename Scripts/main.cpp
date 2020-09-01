@@ -7,8 +7,8 @@ int main() {
 	bool playAgain;
 
 	do {
-		std::unique_ptr<GameManager> gameManager(new GameManager());
-		std::shared_ptr<Map> map(new Map());	
+		std::unique_ptr<GameManager> gameManager = std::make_unique<GameManager>();
+		std::shared_ptr<Map> map = std::make_shared<Map>();	
 
 		do {
 			map->drawMap();
