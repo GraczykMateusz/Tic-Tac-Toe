@@ -1,0 +1,28 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/wm/Programs/Tic-Tac-Toe/src/Map.cpp
+iostream
+-
+memory
+-
+vector
+-
+Map.h
+/home/wm/Programs/Tic-Tac-Toe/src/Map.h
+systemClear.h
+/home/wm/Programs/Tic-Tac-Toe/src/systemClear.h
+
+/home/wm/Programs/Tic-Tac-Toe/src/Map.h
+string
+-
+vector
+-
+
+/home/wm/Programs/Tic-Tac-Toe/src/systemClear.h
+
